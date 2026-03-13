@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+
+  # PostgreSQL database
+  db:
+    image: postgres:15
+    container_name: healyn-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: healyn_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  # Backend (Node.js)
+  backend:
+    build: ./backend
+    container_name: healyn-backend
+    restart: always
+    env_file:
+      - ./backend/.env
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: healyn_db
+      DB_PORT: 5432
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  # Frontend (React, Angular, or static HTML)
+  frontend:
+    build: ./frontend
+    container_name: healyn-frontend
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
