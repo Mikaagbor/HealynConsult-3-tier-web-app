@@ -49,7 +49,7 @@ jobs:
         password: ${{ secrets.VM_PASSWORD }}
         port: 22
         script: |
-          cd ~/HealynConsult || mkdir ~/HealynConsult
-          git pull origin main
-          docker-compose down
+          cd ~/HealynConsult-3-tier-web-app
+          docker-compse down
+          docker-compose pull
           docker-compose up -d --build
