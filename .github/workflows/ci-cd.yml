@@ -40,7 +40,7 @@ jobs:
       run: |
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/healyn-frontend:latest
 
-    # 7️⃣ SSH into VM using password
+    # 7️⃣ SSH into VM using password.
     - name: Deploy to Azure VM
       uses: appleboy/ssh-action@v0.1.7
       with:
