@@ -50,6 +50,6 @@ jobs:
         port: 22
         script: |
           cd ~/HealynConsult-3-tier-web-app
-          docker-compse down
-          docker-compose pull
-          docker-compose up -d --build
+          sudo docker-compse down
+          sudo docker-compose pull
+          sudo docker-compose up -d --build
